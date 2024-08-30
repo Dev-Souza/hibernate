@@ -24,7 +24,7 @@ public class HibernateUtil {
 	}
 	
 	public static EntityManager geEntityManager() {
-		return factory.createEntityManager(); //Prove a parte de persistence
+		return factory.createEntityManager(); //Prove a parte de persistencia
 	}
 	
 }
