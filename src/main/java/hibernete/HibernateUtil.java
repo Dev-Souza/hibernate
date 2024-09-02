@@ -27,7 +27,7 @@ public class HibernateUtil {
 		return factory.createEntityManager(); //Prove a parte de persistencia
 	}
 	
-	public static Object getPrimaryKey(Object entidade) {
+	public static Object getPrimaryKey(Object entidade) { //Retorna a primary
 		return factory.getPersistenceUnitUtil().getIdentifier(entidade);
 	}
 	
