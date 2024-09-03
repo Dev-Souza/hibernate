@@ -1,11 +1,22 @@
 package Model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	
+	@NamedQuery(name = "UsuarioPessoa.todos", query = "SELECT u FROM UsuarioPessoa u"),
+	@NamedQuery(name = "UsuarioPessoa.buscaPorNome", query = "SELECT u FROM UsuarioPessoa u WHERE u.nome = :nome")
+})
 public class UsuarioPessoa {
 
 	@Id
@@ -18,6 +29,17 @@ public class UsuarioPessoa {
 	private String login;
 	private String senha;
 	private int idade;
+	
+	@OneToMany(mappedBy = "usuarioPessoa", fetch = FetchType.EAGER)
+	private List<TelefoneUser> telefoneUsers;
+	
+	public void setTelefoneUsers(List<TelefoneUser> telefoneUsers) {
+		this.telefoneUsers = telefoneUsers;
+	}
+	
+	public List<TelefoneUser> getTelefoneUsers() {
+		return telefoneUsers;
+	}
 	
 	public int getIdade() {
 		return idade;
@@ -73,6 +95,12 @@ public class UsuarioPessoa {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	@Override
+	public String toString() {
+		return "UsuarioPessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email
+				+ ", login=" + login + ", senha=" + senha + ", idade=" + idade + "]";
 	}
 
 }
